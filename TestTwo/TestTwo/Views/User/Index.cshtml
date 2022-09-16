@@ -1,0 +1,42 @@
+﻿@model TestTwo.Models.UserViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+}
+@if (string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    if(!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <span style="color:red;">Error: @Model.ErrorMessage</span>
+    }
+
+    <form id="user" method="post" asp-action="Index" asp-controller="User" asp-route-userId="@Model.Id">
+        <input id="id" asp-for="Id" type="hidden" />
+        @if (Model.CreationMode)
+        {
+            <div>
+                Login: <input id="login" asp-for="Login" />
+            </div>
+        }
+        else
+        {
+        <div>
+            Login: <input id="login" asp-for="Login" readonly="@(true)" />
+        </div>
+        }
+        <div>
+            First name: <input id="firstname" asp-for="Firstname" />
+        </div>
+        <div>
+            Last name: <input id="lastname" asp-for="Lastname" />
+        </div>
+        <input type="hidden" asp-for="CreationMode" value="@(string.IsNullOrEmpty(Model.Firstname))"/>
+        <div>
+            <button id="save" type="submit" >Save</button>
+            <button id="cancel" type="submit" asp-action="UserList" asp-controller="User">Cancel</button>
+        </div>
+    </form>
+}
+else
+{
+    <strong id="errorMessage">@Model.ErrorMessage</strong>
+}

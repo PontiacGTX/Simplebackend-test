@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h2 >Test Two</h2>
+</div>
+<div style="white-space: pre-wrap;">
+    <p>
+        Your task is to finish implementation of UserController and UserViewModel (see the initial code) for a website that will be used by administrators to create or edit users (you should use ASP.NET Core MVC).
+        <b>Requirements</b>
+        You must meet the following requirements:
+        <b>Creation mode</b>
+        1.	The title of a page in Creation mode is Create a new user.
+        2.	Creation mode is active if a request URL does not contain a user ID, e.g. http://localhost:5000/User/Index.
+        <b>Edit mode</b>
+        1.	The title of a page in Edit mode is Edit a user.
+        2.	Edit mode is active if a request URL contains a user ID, e.g. http://localhost:5000/User/Index/userId, where userId is the GUID of a user that should be edited.
+        3.	In Edit mode, all elements on a page (id, login, Firstname, lastname) must be populated based on data retrieved with IUserService.
+        4.	If it is not possible to find a given user, the errorMessage element on a page should be set to User '{userId}' was not found!, where userId is the GUID of the user that was not found.
+        <b>Buttons</b>
+        1.	When the Cancel button is clicked, the administrator should be redirected to the /User/ListOfUsers view (you do not need to create or edit this view) with the code 302.
+        2.	When the Save button is clicked and the operation is performed successfully, the administrator should be redirected to the /User/Confirmation view (you do not need to create or edit this view) with the code 302.
+        3.	When the Save button is clicked in Creation mode, a new user should be created with IUserService.
+        4.	When the Save button is clicked in Edit mode, the user should be updated with IUserService.
+        5.	Login of a user is obligatory. If it is not provided, the errorMessage element on a page should be set to Invalid data! and the user should not be updated or created.
+        <b>Hints</b>
+        1.	UserController must be inhertied from the proper class. You need to do add a missing code.
+        2.	If HTTP POST request to the website contains no Id (see UserViewModel.Id) then it means that a new user must be created.
+        3.	To perform redirection use RedirectToPage.
+        4.	In your implementation of UserController you should use an injected service, IUserService, to get, create or update a user. <b>You do not need to create or modify it. See the initial code for details.</b>
+        5.	A user is represented with User class (for details see the initial code). <b>You do not need to create or modify it.</b>
+        . To implement UserController correctly analyze the following view that will send requests to your controller.<b> You do not need to modify this view.</b>
+    </p>
+</div>
+
