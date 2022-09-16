@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Test One</title>
+</head>
+<body>
+    <h1>Test one</h1>
+    <p>
+        You work for a software company that develops a SaaS solution that allows users to have their own blogs. To store the list of blogs and posts you use Entity Framework Core. Your colleague has started the implementation but it doesn't work. Your task is to x the bugs and nish the implementation so that all the requirements are met.
+        Currently, blogs are modelled in the following way:
+    </p>
+    <div style="white-space: pre-wrap;">
+        public class BlogEntity
+        {
+            public int BlogId { get; set; }
+            public string Name { get; set; }
+            public bool IsActive { get; set; }
+            public List&lt; PostEntity&gt; Articles { get; set; }
+        }
+
+     Posts are modelled in the following way:
+
+        public class PostEntity
+        {
+            public int PostId { get; set; }
+            public int ParentId { get; set; }
+            public string Name { get; set; }
+            public string Content { get; set; }
+            public DateTime Created { get; set; }
+            public DateTime? Updated { get; set; }
+        }
+
+        A database context looks like this:
+
+        public class BlogsContext : DbContext
+        {
+            public DbSet&lt;BlogEntity&gt; BlogsEntities { get; set; }
+            public DbSet&lt;PostEntity&gt; PostsEntities { get; set; }
+            public BlogsContext(DbContextOptions&lt;BlogsContext&gt; options)
+            : base(options)
+            {
+            }
+        }
+    </div>
+    <div>
+        BlogEntity requirements:
+        <ul>
+            <li>
+                Blogs should be stored in a table with the name blogs.
+            </li>
+            <li>
+                All Fields are mandatory.
+            </li>
+            <li>
+                The column that stores BlogEntity.BlogId should be called blog_id.
+            </li>
+            <li>
+                Name may not be longer than 50 or shorter than 10 characters.
+            </li>
+            <li>
+                Articles should be a navigation property and should provide access to all posts for a given blog.
+
+            </li>
+        </ul>
+
+        PostEntity requirements:
+        <ul>
+            <li>
+                Posts should be stored in a table with the name articles.
+            </li>
+            <li>
+                It should not be possible to de ne a post without a blog.
+            </li>
+            <li>
+                All Fields, except Updated, are mandatory.
+            </li>
+            <li>
+                The column that stores PostEntity.PostId should be called post_id.
+            </li>
+            <li>
+                Name may not be longer than 50 or shorter than 10 characters. Content may not be longer than 1000 characters.
+            </li>
+            <li>
+                ParentId should be a navigation property and should point to the identifier of the blog for which the given post was written.
+            </li>
+            <li>
+                The column that stores PostEntity.ParentId should be called blog_id.
+            </li>
+        </ul>
+
+        General requirements:
+        <ul>
+            <li>Do not change names of properties.</li>
+            <li>If you try to use BlogsContext you will get The entity type 'XXX' requires a primary key to be de ned. Fix this.</li>
+            <li>If possible, all the validations should be forced on the application level and on the database level.</li>
+            <li>For example, if a property is mandatory then a ValidationException should be thrown when the DbContext.SaveChanges method is executed and a column in a database should not be nullable.</li>
+            <li>If a property must be of a given length then it can be validated only on the application level.</li>
+        </ul>
+
+        Hints:
+        <ul>
+            <li>
+                Start by Fixing a problem with primary keys.
+            </li>
+            <li>
+                To score points for validations (e.g. Content cannot be longer than 1000), start by overriding the SaveChanges method.
+            </li>
+            <li>
+                System.ComponentModel.DataAnnotation.Validator can be useful.
+            </li>
+            <li>
+                Your code will be verified with SqlLite In-Memory Database.
+            </li>
+            <li>
+                If you want to try this go to <b><a href="/swagger" target="_blank">Swagger Page</a></b>.
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
